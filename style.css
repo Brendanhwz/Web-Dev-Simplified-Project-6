@@ -1,0 +1,124 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    --page-background-color: hsl(19,2%,66%);
+    margin: 0;
+    background-color: var(--page-background-color);
+}
+
+.button-wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.btn {
+    --btn-background-color: #bbb2e9;
+    --object-color: hsl(355,61%,64%);
+    --button-width: 250px;
+    width: var(--button-width);
+    min-width: var(--button-width);
+    height: calc(var(--button-width) * 0.2);
+    margin: 3rem 20rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: var(--btn-background-color);
+    border: none;
+    outline: none;
+    --btn-border-size: 2px;
+    cursor: pointer;
+}
+/* Styling Type (1) =>> Border Popping Out */
+.btn-border-pop-out::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: var(--btn-border-size) solid var(--btn-background-color);
+    z-index: -1;
+    transition: left, top, right, bottom, 500ms ease-in-out;
+}
+
+.btn-border-pop-out:hover:before,
+.btn-border-pop-out:focus:before {
+    left: calc(var(--btn-border-size) * -4);
+    top: calc(var(--btn-border-size) * -4);
+    right: calc(var(--btn-border-size) * -4);
+    bottom: calc(var(--btn-border-size) * -4);
+}
+/* Styling Type (2) =>> Slide in effect */
+.btn-slide-in::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+    background-color: var(--object-color);
+    transform: scaleX(0);
+    transition: transform 500ms ease-in-out;
+    transform-origin: left;
+}
+.btn-slide-in {
+    z-index: 1;
+    transition: color 500ms ease-in-out;
+}
+.btn-slide-in:hover:before,
+.btn-slide-in:focus:before{
+    transform: scaleX(1);
+}
+.btn-slide-in:hover,
+.btn-slide-in:focus {
+    color: white;
+}
+/* Styling Type (3) =>> Background circle effect */
+.btn-circle-expand::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: var(--object-color);
+    z-index: -1;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 500ms ease-in-out;
+}
+.btn-circle-expand {
+    z-index: 1;
+    overflow: hidden;
+    transition: color 500ms ease-in-out;
+}
+.btn-circle-expand:hover {
+    color: white;
+}
+.btn-circle-expand:hover:before {
+    transform: scale(1.5);
+}
+/* Styling Type (4) =>> Background Underline Effect */
+.btn-border-underline::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: var(--btn-border-size);
+    background-color: var(--object-color);
+    transform: scaleX(0);
+    transition: transform 500ms ease-in-out;
+}
+.btn-border-underline:hover:before,
+.btn-border-underline:focus:before {
+    transform: scaleX(1);
+}
